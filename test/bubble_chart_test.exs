@@ -2,17 +2,17 @@ defmodule BubbleChartTest do
   use Template.Editor, async: true
   use Hound.Helpers
 
-  setup do
+  setup context do
     Editor.Chart.create %Chart{
       type: "scatter",
       dimensions: [
-        %Selector{value: Column.random([:string])},
+        %Selector{value: Column.random(context.table, [:string])},
       ],
       measures: [
-        %Selector{value: Column.random([:string, :int, :records])},
-        %Selector{value: Column.random([:string, :int, :records])},
+        %Selector{value: Column.random(context.table, [:string, :int, :records])},
+        %Selector{value: Column.random(context.table, [:string, :int, :records])},
         nil,
-        %Selector{value: Column.random([:string, :int, :records])},
+        %Selector{value: Column.random(context.table, [:string, :int, :records])},
       ]
     }
   end
@@ -23,7 +23,7 @@ defmodule BubbleChartTest do
     assert Chart.Bubble.is_valid(@node) == true
 
     Editor.Settings.num_groups(10)
-    assert Chart.Bubble.num_bubbles(@node) == 10
+    assert Chart.Bubble.num_bubbles(@node) <= 10
 
     Chart.Bubble.filter(@node, 5)
     assert Chart.Bubble.is_selected_at(@node, 5) == true
