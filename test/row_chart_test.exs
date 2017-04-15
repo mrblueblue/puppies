@@ -5,8 +5,14 @@ defmodule RowChartTest do
   setup do
     Editor.Chart.create %Chart{
       type: "row",
-      dimensions: [%Selector{value: "arrdelay"}],
-      measures: [%Selector{value: "# Records"}],
+      dimensions: [
+        %Selector{value: Column.random([:string, :int])},
+        %Selector{value: Column.random([:string, :int])}
+      ],
+      measures: [
+        %Selector{value: Column.random([:string, :int, :records])},
+        %Selector{value: Column.random([:string, :int, :records])}
+      ],
     }
   end
 
@@ -14,7 +20,6 @@ defmodule RowChartTest do
 
   test "Row Chart" do
     assert Chart.Row.is_valid(@node) == true
-    assert Chart.Row.num_rows(@node) == 12
 
     Editor.Settings.num_groups(5)
     assert Chart.Row.num_rows(@node) == 5

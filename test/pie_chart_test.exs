@@ -5,8 +5,14 @@ defmodule PieChartTest do
   setup do
     Editor.Chart.create %Chart{
       type: "pie",
-      dimensions: [%Selector{value: "carrier_name"}],
-      measures: [%Selector{value: "# Records"}],
+      dimensions: [
+        %Selector{value: Column.random([:string, :int])},
+        %Selector{value: Column.random([:string, :int])}
+      ],
+      measures: [
+        %Selector{value: Column.random([:string, :int, :records])},
+        %Selector{value: Column.random([:string, :int, :records])}
+      ],
     }
   end
 
@@ -14,7 +20,6 @@ defmodule PieChartTest do
 
   test "Pie Chart" do
     assert Chart.Pie.is_valid(@node) == true
-    assert Chart.Pie.num_slices(@node) == 10
 
     Editor.Settings.num_groups(3)
     assert Chart.Pie.num_slices(@node) == 3
