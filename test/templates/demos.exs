@@ -1,4 +1,4 @@
-defmodule Template.Demo do
+defmodule Template.Demos do
   use ExUnit.CaseTemplate
   use Hound.Helpers
 
