@@ -2,9 +2,9 @@ defmodule Template.Editor do
   use ExUnit.CaseTemplate
   use Hound.Helpers
 
-  @opts Application.get_env(:chowchow, :capabilities)
-  @url "http://immerse-v2-master.dev.frontend.builds.mapd.com/"
-  @table "contributions"
+  @opts Application.get_env(:beagle, :capabilities)
+  @url "http://localhost:8002"
+  @table "flights"
 
   setup do
     Hound.start_session @opts

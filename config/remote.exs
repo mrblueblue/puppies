@@ -7,7 +7,8 @@ config :hound,
   port: 80,
   retry_time: 1000
 
-config :chowchow,
+config :beagle,
+  animation_timeout: 1000,
   capabilities: %{
     "os": "OS X",
     "os_version": "El Capitan",
