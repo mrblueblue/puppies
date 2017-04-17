@@ -16,8 +16,9 @@ defmodule LineChartTest do
 
   @node "#chart1"
 
-  test "Line Chart" do
-    IO.inspect attribute_value({:css, "body"}, "class")
+  test("Line Chart", context) do
     assert(Chart.Line.is_valid(@node), "Line chart should render")
+    Chart.Line.brush(@node, [25, 75])
+    assert(Records.selected() !== context.records)
   end
 end

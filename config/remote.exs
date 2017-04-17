@@ -9,7 +9,7 @@ config :hound,
 
 config :beagle,
   animation_timeout: 2000,
-  password: System.get("PASSWORD"),
+  password: System.get_env("PASSWORD"),
   formatters: [Tapex, JUnitFormatter],
   capabilities: %{
     "os": "OS X",

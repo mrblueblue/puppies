@@ -9,4 +9,4 @@ config :hound,
 config :beagle,
   formatters: [Tapex],
   animation_timeout: 1500,
-  password: System.get("PASSWORD")
+  password: System.get_env("PASSWORD")

@@ -16,9 +16,12 @@ defmodule HistogramChartTest do
 
   @node "#chart1"
 
-  test "Histogram Chart" do
+  test("Histogram Chart", context) do
     assert Chart.Histogram.is_valid(@node) == true
     Editor.Chart.save()
     assert Chart.Histogram.is_valid(@node) == true
+
+    Chart.Histogram.brush(@node, [25, 75])
+    assert(Records.selected() !== context.records)
   end
 end
