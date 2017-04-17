@@ -2,12 +2,8 @@ defmodule ChoroplethChartTest do
   use Template.Editor, async: true
   use Hound.Helpers
 
-  @node "#chart1"
-  @tables ["flights", "contributions"]
-
-  setup do
-    setup_dashboard(&create_choropleth/1, @tables)
-  end
+  setup do:
+    setup_dashboard(&create_choropleth/1, ["flights", "contributions"])
 
   test "Choropleth Chart" do
     click({:css, ".geo-json-dropdown"})

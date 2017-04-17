@@ -2,21 +2,8 @@ defmodule HeatmapChartTest do
   use Template.Editor, async: true
   use Hound.Helpers
 
-  setup context do
-    Editor.Chart.create %Chart{
-      type: "heat",
-      dimensions: [
-        %Selector{value: Column.random(context.table, [:int])},
-        %Selector{value: Column.random(context.table, [:int])}
-      ],
-      measures: [
-        %Selector{value: Column.random(context.table, [:string, :int, :records])},
-      ],
-    }
-    :timer.sleep(5000)
-  end
-
-  @node "#chart1"
+  setup do:
+    setup_dashboard(&create_heat/1)
 
   test "Heatmap Chart" do
     assert Chart.Heatmap.is_valid(@node)
@@ -27,5 +14,18 @@ defmodule HeatmapChartTest do
 
     Editor.Chart.save()
     assert Chart.Heatmap.boxes_selected(@node) == [0, 2]
+  end
+
+  defp create_heat table do
+    Editor.Chart.create %Chart{
+      type: "heat",
+      dimensions: [
+        %Selector{value: Column.random(table, [:int])},
+        %Selector{value: Column.random(table, [:int])}
+      ],
+      measures: [
+        %Selector{value: Column.random(table, [:string, :int, :records])},
+      ],
+    }
   end
 end

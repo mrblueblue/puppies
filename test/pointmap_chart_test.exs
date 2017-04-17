@@ -2,18 +2,11 @@ defmodule PointmapChartTest do
   use Template.Editor, async: true
   use Hound.Helpers
 
-  @node "#chart1"
-  @scatter_spec %{
-    legend: false,
-    use_map: true
-  }
-
-  setup do
+  setup do:
     setup_dashboard(&create_pointmap/1)
-  end
 
   test "Scatter Chart" do
-    assert Chart.Raster.is_valid(@node, @scatter_spec) == true
+    assert Chart.Raster.is_valid(@node, %{legend: false, use_map: true})
   end
 
   defp create_pointmap table do
