@@ -12,7 +12,7 @@ Enum.each templates, fn(file) ->
 end
 
 opts = [
-  max_cases: 4,
+  max_cases: 3,
   autorun: false,
   formatters: Application.get_env(:beagle, :formatters)
 ]

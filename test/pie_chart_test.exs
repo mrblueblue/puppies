@@ -2,22 +2,8 @@ defmodule PieChartTest do
   use Template.Editor, async: true
   use Hound.Helpers
 
-  setup context do
-    Editor.Chart.create %Chart{
-      type: "pie",
-      dimensions: [
-        %Selector{value: Column.random(context.table, [:string, :int])},
-      ],
-      measures: [
-        %Selector{value: Column.random(context.table, [:string, :int, :records])},
-        %Selector{value: Column.random(context.table, [:string, :int, :records])}
-      ],
-    }
-    Beagle.Helpers.wait_until_not_visible(".chart-overlay")
-    :ok
-  end
-
-  @node "#chart1"
+  setup do:
+    setup_dashboard(&create_pie/1)
 
   test "Pie Chart" do
     assert Chart.Pie.is_valid(@node) == true
@@ -30,5 +16,18 @@ defmodule PieChartTest do
 
     Editor.Chart.save()
     assert Chart.Pie.is_selected_at(@node, 0) == true
+  end
+
+  defp create_pie table do
+    Editor.Chart.create %Chart{
+      type: "pie",
+      dimensions: [
+        %Selector{value: Column.random(table, [:string, :int])},
+      ],
+      measures: [
+        %Selector{value: Column.random(table, [:string, :int, :records])},
+        %Selector{value: Column.random(table, [:string, :int, :records])}
+      ],
+    }
   end
 end
