@@ -18,5 +18,7 @@ defmodule HistogramChartTest do
 
   test "Histogram Chart" do
     assert Chart.Histogram.is_valid(@node) == true
+    Editor.Chart.save()
+    assert Chart.Histogram.is_valid(@node) == true
   end
 end

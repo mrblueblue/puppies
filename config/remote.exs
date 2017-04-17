@@ -5,10 +5,12 @@ config :hound,
   driver: "selenium",
   host: System.get_env("HOST"),
   port: 80,
-  retry_time: 1000
+  retry_time: 2000
 
 config :beagle,
-  animation_timeout: 1000,
+  animation_timeout: 2000,
+  password: System.get("PASSWORD"),
+  formatters: [Tapex, JUnitFormatter],
   capabilities: %{
     "os": "OS X",
     "os_version": "El Capitan",
@@ -20,3 +22,8 @@ config :beagle,
     "browserstack.user": System.get_env("USER"),
     "browserstack.key": System.get_env("KEY")
   }
+
+config :junit_formatter,
+  report_file: "report_file_test.xml",
+  report_dir: "./test",
+  print_report_file: true

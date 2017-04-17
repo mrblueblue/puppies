@@ -14,10 +14,10 @@ defmodule Template.Editor do
   setup do
     Hound.start_session @opts
     navigate_to(@url)
-
     table = Enum.random(@tables)
     create_dashboard(table)
-    [table: table]
+    num_records = Records.selected()
+    [table: table, records: num_records]
   end
 
   defp create_dashboard table do

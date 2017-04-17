@@ -3,7 +3,10 @@ use Mix.Config
 config :hound,
   browser: "chrome",
   driver: "selenium",
-  port: 4444
+  port: 4444,
+  retry_time: 1500
 
 config :beagle,
-  animation_timeout: 750
+  formatters: [Tapex],
+  animation_timeout: 1500,
+  password: System.get("PASSWORD")

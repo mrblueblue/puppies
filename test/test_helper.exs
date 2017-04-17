@@ -1,18 +1,21 @@
-Application.ensure_all_started(:hound)
+{:ok, helpers} = File.ls("./test/helpers")
+{:ok, templates} = File.ls("./test/templates")
 
-Code.require_file("test/templates/demos.exs")
-Code.require_file("test/templates/editor.exs")
-Code.require_file("test/helpers/chart.exs")
+Code.require_file "./lib/beagle.exs"
 
-Code.require_file("test/helpers/editor.exs")
-Code.require_file("test/helpers/column.exs")
-Code.require_file("test/helpers/histogram.exs")
-Code.require_file("test/helpers/line.exs")
-Code.require_file("test/helpers/bubble.exs")
-Code.require_file("test/helpers/heatmap.exs")
-Code.require_file("test/helpers/pie.exs")
-Code.require_file("test/helpers/raster.exs")
-Code.require_file("test/helpers/row.exs")
-Code.require_file("test/helpers/legend.exs")
+Enum.each helpers, fn(file) ->
+  Code.require_file "helpers/#{file}", __DIR__
+end
 
-ExUnit.start()
+Enum.each templates, fn(file) ->
+  Code.require_file "templates/#{file}", __DIR__
+end
+
+opts = [
+  max_cases: 4,
+  autorun: false,
+  formatters: Application.get_env(:beagle, :formatters)
+]
+
+Application.ensure_all_started :hound
+ExUnit.start opts

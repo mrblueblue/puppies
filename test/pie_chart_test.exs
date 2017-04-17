@@ -7,13 +7,14 @@ defmodule PieChartTest do
       type: "pie",
       dimensions: [
         %Selector{value: Column.random(context.table, [:string, :int])},
-        %Selector{value: Column.random(context.table, [:string, :int])}
       ],
       measures: [
         %Selector{value: Column.random(context.table, [:string, :int, :records])},
         %Selector{value: Column.random(context.table, [:string, :int, :records])}
       ],
     }
+    Beagle.Helpers.wait_until_not_visible(".chart-overlay")
+    :ok
   end
 
   @node "#chart1"
@@ -25,6 +26,9 @@ defmodule PieChartTest do
     assert Chart.Pie.num_slices(@node) <= 3
 
     Chart.Pie.filter(@node, 0)
+    assert Chart.Pie.is_selected_at(@node, 0) == true
+
+    Editor.Chart.save()
     assert Chart.Pie.is_selected_at(@node, 0) == true
   end
 end

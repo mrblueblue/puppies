@@ -11,7 +11,6 @@ defmodule RowChartTest do
       ],
       measures: [
         %Selector{value: Column.random(context.table, [:string, :int, :records])},
-        %Selector{value: Column.random(context.table, [:string, :int, :records])}
       ],
     }
   end
@@ -24,7 +23,10 @@ defmodule RowChartTest do
     Editor.Settings.num_groups(5)
     assert Chart.Row.num_rows(@node) <= 5
 
-    Chart.Row.filter(@node, 2)
-    assert Chart.Row.is_selected_at(@node, 2) == true
+    Chart.Row.filter(@node, 1)
+    assert Chart.Row.is_selected_at(@node, 1) == true
+
+    Editor.Chart.save()
+    assert Chart.Row.is_selected_at(@node, 1) == true
   end
 end

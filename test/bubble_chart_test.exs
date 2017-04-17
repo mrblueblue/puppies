@@ -6,13 +6,13 @@ defmodule BubbleChartTest do
     Editor.Chart.create %Chart{
       type: "scatter",
       dimensions: [
-        %Selector{value: Column.random(context.table, [:string])},
+        %Selector{value: Column.random(context.table, [:int])},
       ],
       measures: [
-        %Selector{value: Column.random(context.table, [:string, :int, :records])},
-        %Selector{value: Column.random(context.table, [:string, :int, :records])},
+        %Selector{value: Column.random(context.table, [:int, :records])},
+        %Selector{value: Column.random(context.table, [:int, :records])},
         nil,
-        %Selector{value: Column.random(context.table, [:string, :int, :records])},
+        %Selector{value: Column.random(context.table, [:int, :records])},
       ]
     }
   end
@@ -26,6 +26,9 @@ defmodule BubbleChartTest do
     assert Chart.Bubble.num_bubbles(@node) <= 10
 
     Chart.Bubble.filter(@node, 5)
+    assert Chart.Bubble.is_selected_at(@node, 5) == true
+
+    Editor.Chart.save()
     assert Chart.Bubble.is_selected_at(@node, 5) == true
   end
 end
