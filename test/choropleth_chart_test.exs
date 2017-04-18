@@ -11,6 +11,7 @@ defmodule ChoroplethChartTest do
     :timer.sleep(3000)
     Chart.Choropleth.filter(@node, "ca")
     :timer.sleep(10000)
+    assert Chart.Choropleth.is_selected_at(@node, "ca")
   end
 
   defp create_choropleth table do

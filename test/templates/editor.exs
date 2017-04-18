@@ -10,8 +10,16 @@ defmodule Template.Editor do
       def setup_dashboard(create_chart, tables \\ @tables) do
         table = Enum.random(tables)
         Navigator.new_dashboard(table)
+        click({:css, ".add-chart"})
         num_records = Records.selected()
         create_chart.(table)
+        [table: table, records: num_records]
+      end
+
+      def setup_dashboard do
+        table = Enum.random(@tables)
+        Navigator.new_dashboard(table)
+        num_records = Records.selected()
         [table: table, records: num_records]
       end
     end
