@@ -8,9 +8,7 @@ defmodule ChoroplethChartTest do
   test "Choropleth Chart" do
     click({:css, ".geo-json-dropdown"})
     Editor.Settings.geo_json "US State"
-    :timer.sleep(3000)
     Chart.Choropleth.filter(@node, "ca")
-    :timer.sleep(10000)
     assert Chart.Choropleth.is_selected_at(@node, "ca")
   end
 
@@ -24,6 +22,7 @@ defmodule ChoroplethChartTest do
         %Selector{value: Column.random(table, [:int])}
       ]
     }
+    :timer.sleep(Application.get_env(:beagle, :animation_timeout) * 2)
   end
 
 end

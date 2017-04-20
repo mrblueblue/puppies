@@ -26,7 +26,7 @@ defmodule Template.Editor do
   end
 
   @opts Application.get_env(:beagle, :capabilities)
-  @url "http://localhost:8002"
+  @url Application.get_env(:beagle, :url)
 
   setup do
     Hound.start_session @opts

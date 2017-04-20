@@ -7,6 +7,7 @@ config :hound,
   retry_time: 1500
 
 config :beagle,
+  url: "http://localhost:8002",
   formatters: [Tapex],
   animation_timeout: 1500,
   password: System.get_env("PASSWORD")

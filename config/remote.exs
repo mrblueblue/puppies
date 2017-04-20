@@ -8,19 +8,22 @@ config :hound,
   retry_time: 2000
 
 config :beagle,
+  url: System.get_env("URL"),
   animation_timeout: 2000,
   password: System.get_env("PASSWORD"),
   formatters: [Tapex, JUnitFormatter],
   capabilities: %{
-    "os": "OS X",
-    "os_version": "El Capitan",
-    "platform": "MAC",
-    "browser": "Chrome",
-    "browser_version": "52.0",
-    "resolution": "1024x768",
-    "browserstack.local": "true",
-    "browserstack.user": System.get_env("USER"),
-    "browserstack.key": System.get_env("KEY")
+    driver: %{
+      os: "OS X",
+      os_version: "El Capitan",
+      platform: "MAC",
+      browser: "Chrome",
+      browser_version: "52.0",
+      resolution: "1024x768",
+      "browserstack.local": "true",
+      "browserstack.user": System.get_env("USER"),
+      "browserstack.key": System.get_env("KEY")
+    }
   }
 
 config :junit_formatter,
