@@ -1,4 +1,4 @@
-# beagle
+# puppies
 
 Elixir scripts to automate mind-numbing release checks. Sniffs out bugs for you!
 
